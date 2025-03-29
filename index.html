@@ -360,42 +360,56 @@
         }
         
         /* Responsive */
-        @media (max-width: 992px) {
-            .hero-content {
-                flex-direction: column;
-            }
-            
-            .hero-text {
-                padding-right: 0;
-                margin-bottom: 50px;
-                text-align: center;
-            }
-
-              .container {
-                max-width: 100%;
-                padding: 0 10px;
-              }
-            
-            .benefits-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .steps {
-                flex-direction: column;
-            }
-            
-            .step {
-                margin-bottom: 50px;
-            }
-            
-            .step:not(:last-child):after {
-                display: none;
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        @media (max-width: 768px) {
+          /* Container adjustments */
+          .container {
+            max-width: 100%;
+            padding: 0 10px;
+          }
+          
+          /* Hide navigation menu */
+          nav {
+            display: none;
+          }
+          
+          /* Hero Section adjustments */
+          .hero-content {
+            flex-direction: column;
+            align-items: center;
+          }
+          .hero-text {
+            padding-right: 0;
+            margin-bottom: 20px;
+            text-align: center;
+          }
+          .hero-image video {
+            width: 100%;
+            height: auto;
+          }
+          
+          /* Benefits grid becomes one column */
+          .benefits-grid {
+            grid-template-columns: 1fr;
+          }
+          
+          /* How it Works adjustments */
+          .steps {
+            flex-direction: column;
+          }
+          .step {
+            margin-bottom: 20px;
+          }
+          .step:not(:last-child):after {
+            display: none;
+          }
+          
+          /* Footer adjustments */
+          .footer-content {
+            grid-template-columns: 1fr;
+            text-align: center;
+          }
         }
+
 
 
         /* Modal styles */
