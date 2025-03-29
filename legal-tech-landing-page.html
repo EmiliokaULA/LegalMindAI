@@ -271,31 +271,6 @@
             margin: 0 auto 30px;
         }
         
-        .testimonials {
-            padding: 100px 0;
-            background-color: var(--light-color);
-        }
-        
-        .clients {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 40px;
-            margin-top: 40px;
-        }
-        
-        .client-logo {
-            max-width: 150px;
-            height: auto;
-            opacity: 0.7;
-            transition: opacity 0.3s;
-        }
-        
-        .client-logo:hover {
-            opacity: 1;
-        }
-        
         .contact-form {
             max-width: 600px;
             margin: 0 auto;
@@ -497,6 +472,18 @@
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+        <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3NTCPQXBS6"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-3NTCPQXBS6');
+    </script>
+
+
 </head>
 <body>
     <!-- Header -->
@@ -507,7 +494,6 @@
                 <ul>
                     <li><a href="#beneficios">Beneficios</a></li>
                     <li><a href="#como-funciona">Cómo Funciona</a></li>
-                    <li><a href="#clientes">Clientes</a></li>
                     <li><a href="#contacto" class="btn">Solicitar Demo</a></li>
                 </ul>
             </nav>
@@ -519,7 +505,7 @@
         <div class="container hero-content">
             <div class="hero-text">
                 <h1>Transforme su experiencia legal en ventaja competitiva</h1>
-                <p>LegalMind AI analiza los casos históricos de su bufete para potenciar las estrategias futuras. Convierta años de experiencia en recomendaciones precisas para cada nuevo caso.</p>
+                <p>LegalMind AI potencia el valor de los años de experiencia de tu bufete, combinando el análisis histórico con tecnología de vanguardia para automatizar procesos, optimizar la investigación y facilitar decisiones estratégicas.</p>
                 <a href="#contacto" class="btn">Descubra cómo funciona</a>
             </div>
             <div class="hero-image">
@@ -533,7 +519,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Ventajas que transformarán su práctica legal</h2>
-                <p>LegalMind AI potencia el valor de su experiencia acumulada y la convierte en su activo más valioso</p>
+                <p>LegalMind AI se conecta a tu base de casos y documentos legales, estructurando y centralizando la información de forma segura en un único dashboard. De esta manera, transforma el conocimiento institucional en un activo estratégico que abarca:</p>
             </div>
             <div class="benefits-grid">
                 <div class="benefit-card">
@@ -541,35 +527,35 @@
                         <i class="fas fa-bolt"></i>
                     </div>
                     <h3>Decisiones más rápidas</h3>
-                    <p>Reduzca el tiempo de investigación en un 70% al identificar automáticamente precedentes relevantes de su propia trayectoria.</p>
+                    <p>Reduce hasta un 70% el tiempo de investigación al identificar automáticamente precedentes y estrategias exitosas en casos similares, combinando la experiencia acumulada con algoritmos de búsqueda avanzada..</p>
                 </div>
                 <div class="benefit-card">
                     <div class="benefit-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
                     <h3>Mayor tasa de éxito</h3>
-                    <p>Mejore sus resultados aprovechando estrategias que funcionaron en casos similares, con recomendaciones basadas en datos.</p>
+                    <p>Aprovecha recomendaciones basadas en datos históricos y procesos automatizados, optimizando la revisión documental y el análisis predictivo para mejorar los resultados de cada caso.</p>
                 </div>
                 <div class="benefit-card">
                     <div class="benefit-icon">
                         <i class="fas fa-brain"></i>
                     </div>
-                    <h3>Conocimiento institucional</h3>
-                    <p>Preserve la experiencia de sus mejores profesionales y hágala accesible para todo el equipo, incluso cuando ellos no estén.</p>
+                    <h3>Automatización integral</h3>
+                    <p>Minimiza tareas administrativas y repetitivas, desde la revisión de contratos hasta la generación de reportes y la atención al cliente, permitiendo que tus abogados se concentren en lo verdaderamente estratégico.</p>
                 </div>
                 <div class="benefit-card">
                     <div class="benefit-icon">
                         <i class="fas fa-lock"></i>
                     </div>
                     <h3>Seguridad garantizada</h3>
-                    <p>Su información nunca sale de sus servidores. Implementación local con los más altos estándares de seguridad y privacidad.</p>
+                    <p>Con implementación local y los más altos estándares de privacidad, tu información nunca sale de tus servidores, asegurando que la gestión de datos críticos sea siempre segura y controlada.</p>
                 </div>
                 <div class="benefit-card">
                     <div class="benefit-icon">
                         <i class="fas fa-user-graduate"></i>
                     </div>
-                    <h3>Formación acelerada</h3>
-                    <p>Permita que los abogados junior aprendan de casos reales y mejoren su capacidad analítica con recomendaciones expertas.</p>
+                    <h3>Conocimiento y formación acelerada</h3>
+                    <p>Facilita el acceso a la experiencia de los mejores profesionales del bufete. Los abogados junior podrán aprender de casos reales y mejorar su capacidad analítica gracias a sugerencias expertas en tiempo real.</p>
                 </div>
                 <div class="benefit-card">
                     <div class="benefit-icon">
@@ -592,39 +578,48 @@
             <div class="steps">
                 <div class="step">
                     <div class="step-number">1</div>
-                    <h3>Conexión con su historial</h3>
-                    <p>Nuestro sistema se integra con su base de casos y documentos legales, procesando y estructurando la información.</p>
+                    <h3>Integración Total</h3>
+                    <p>Conecta tu historial legal y documentos en una plataforma centralizada, permitiendo una gestión unificada y segura.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h3>Análisis inteligente</h3>
-                    <p>Al ingresar un nuevo caso, nuestra IA identifica patrones, precedentes y estrategias exitosas en casos similares.</p>
+                    <h3>Análisis Inteligente y Automatizado</h3>
+                    <p>Al ingresar un nuevo caso, la IA analiza patrones y precedentes en tu propia trayectoria, combinando la experiencia institucional con tecnología avanzada que automatiza la búsqueda y revisión documental.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
-                    <h3>Recomendaciones precisas</h3>
-                    <p>Reciba sugerencias específicas basadas en su propia experiencia, con referencias directas a casos relevantes.</p>
+                    <h3>Recomendaciones Precisamente Personalizada</h3>
+                    <p>Recibe sugerencias estratégicas basadas en la experiencia acumulada y en procesos automatizados, lo que te permite tomar decisiones informadas y adaptadas a cada situación particular.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials" id="clientes">
-        <div class="container">
-            <div class="section-title">
-                <h2>Bufetes que confían en nosotros</h2>
-                <p>Descubra por qué los despachos más innovadores están implementando LegalMind AI</p>
-            </div>
-            <div class="clients">
-                <img src="/api/placeholder/150/80" alt="Logo Cliente 1" class="client-logo">
-                <img src="/api/placeholder/150/80" alt="Logo Cliente 2" class="client-logo">
-                <img src="/api/placeholder/150/80" alt="Logo Cliente 3" class="client-logo">
-                <img src="/api/placeholder/150/80" alt="Logo Cliente 4" class="client-logo">
-                <img src="/api/placeholder/150/80" alt="Logo Cliente 5" class="client-logo">
-            </div>
-        </div>
-    </section>
+<!-- Sección de Caso de Éxito: Ahorro Económico -->
+<section id="case-study" style="background-color: #f9f9f9; padding: 60px 20px; text-align: center;">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <h2 style="font-size: 2.5em; margin-bottom: 20px;">Caso de Éxito</h2>
+      <p style="font-size: 1.2em; margin-bottom: 30px;">
+        Con un equipo de <strong>10 abogados</strong>, este bufete enfrentaba grandes pérdidas debido a tareas administrativas no facturables.
+      </p>
+      <div style="background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <p style="font-size: 1.1em; margin-bottom: 15px;">
+          <strong>Antes de LegalMind AI:</strong> Cada abogado perdía aproximadamente <strong>10 horas semanales</strong> en tareas administrativas, lo que se traducía en una pérdida anual de hasta <strong>$100,000</strong> por profesional.
+        </p>
+        <p style="font-size: 1.1em; margin-bottom: 15px;">
+          <strong>Después de implementar LegalMind AI:</strong> La automatización y análisis inteligente redujo ese tiempo en un <strong>50%</strong>, generando un ahorro de aproximadamente <strong>$50,000 anuales</strong> por abogado.
+        </p>
+        <p style="font-size: 1.1em; margin-bottom: 15px;">
+          <strong>Ahorro Total Anual:</strong> <strong>$500,000</strong> para el bufete.
+        </p>
+      </div>
+      <p style="font-size: 1.1em; margin-top: 20px;">
+        LegalMind AI convierte la experiencia acumulada en ahorros tangibles, optimizando procesos y potenciando la eficiencia en cada caso.
+      </p>
+    </div>
+  </section>
+  
+  
 
     <!-- Modal -->
     <div id="demoModal" class="modal">
@@ -634,41 +629,8 @@
             <p>Completa el formulario y un especialista te contactará en las próximas 24 horas.</p>
             <form id="demoForm" class="contact-form" action="https://formspree.io/f/xjvqwkvo" method="POST">
                 <div class="form-group">
-                    <label for="name">Nombre completo</label>
-                    <input type="text" id="name" name="name" class="form-control" required>
-                </div>
-                <div class="form-group">
                     <label for="email">Correo electrónico</label>
                     <input type="email" id="email" name="email" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="company">Nombre del bufete</label>
-                    <input type="text" id="company" name="company" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="position">Cargo</label>
-                    <input type="text" id="position" name="position" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="size">Tamaño del despacho</label>
-                    <select id="size" name="size" class="form-control" required>
-                        <option value="">Seleccionar</option>
-                        <option value="small">1-10 abogados</option>
-                        <option value="medium">11-50 abogados</option>
-                        <option value="large">51-100 abogados</option>
-                        <option value="enterprise">Más de 100 abogados</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="interest">¿Qué te interesa más de LegalMind AI?</label>
-                    <select id="interest" name="interest" class="form-control" required>
-                        <option value="">Seleccionar</option>
-                        <option value="efficiency">Eficiencia en la investigación</option>
-                        <option value="strategy">Mejora de estrategias legales</option>
-                        <option value="training">Formación de abogados junior</option>
-                        <option value="knowledge">Gestión del conocimiento</option>
-                        <option value="other">Otro</option>
-                    </select>
                 </div>
                 <button type="submit" class="btn" style="width: 100%;">Solicitar Demo</button>
             </form>
@@ -800,4 +762,6 @@
     
 </body>
 </html>
+
+
 
