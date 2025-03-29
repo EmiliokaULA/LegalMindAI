@@ -392,32 +392,13 @@
             }
         }
         
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-            }
-            
-            .logo {
-                margin-bottom: 20px;
-            }
-            
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            nav ul li {
-                margin: 10px 0;
-            }
-            
-            .benefits-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
+    @media (max-width: 767px) {
+        .solo-tablet {
+            display: none !important;
         }
+    }
+
+
 
         /* Modal styles */
         .modal {
