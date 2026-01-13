@@ -3,873 +3,533 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LegalMind AI - Inteligencia Artificial para Bufetes de Abogados</title>
+    <title>Mapa Interactivo de España</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
     <style>
-        :root {
-            --primary-color: #0A2540;
-            --secondary-color: #1E3A8A;
-            --accent-color: #3B82F6;
-            --light-color: #F8FAFC;
-            --gray-color: #64748B;
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            color: var(--primary-color);
-            background-color: var(--light-color);
-            line-height: 1.6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1600px;
             margin: 0 auto;
-            padding: 0 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.4);
+            overflow: hidden;
         }
         
-        header {
-            background-color: var(--primary-color);
-            padding: 20px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            font-weight: 700;
-            font-size: 24px;
-        }
-        
-        .logo span {
-            color: var(--accent-color);
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 30px;
-        }
-        
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        nav ul li a:hover {
-            color: var(--accent-color);
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .btn:hover {
-            background-color: #2563EB;
-        }
-        
-        .hero {
-            padding: 160px 0 100px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-        }
-        
-        .hero-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .hero-text {
-            flex: 1;
-            padding-right: 50px;
-        }
-        
-        .hero-text h1 {
-            font-size: 48px;
-            line-height: 1.2;
-            margin-bottom: 20px;
-        }
-        
-        .hero-text p {
-            font-size: 18px;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-        
-        .hero-image {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-        }
-        
-        .hero-image video {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        
-        .benefits {
-            padding: 100px 0;
-            background-color: white;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        
-        .section-title h2 {
-            font-size: 36px;
-            margin-bottom: 15px;
-        }
-        
-        .section-title p {
-            font-size: 18px;
-            color: var(--gray-color);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-        
-        .benefit-card {
-            background-color: var(--light-color);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            transition: transform 0.3s;
-        }
-        
-        .benefit-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .benefit-icon {
-            background-color: rgba(59, 130, 246, 0.1);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        
-        .benefit-icon i {
-            color: var(--accent-color);
-            font-size: 24px;
-        }
-        
-        .benefit-card h3 {
-            font-size: 22px;
-            margin-bottom: 15px;
-        }
-        
-        .benefit-card p {
-            color: var(--gray-color);
-        }
-        
-        .how-it-works {
-            padding: 100px 0;
-            background-color: var(--light-color);
-        }
-        
-        .steps {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-top: 50px;
-        }
-        
-        .step {
-            flex: 1;
-            text-align: center;
-            padding: 0 20px;
-            position: relative;
-        }
-        
-        .step:not(:last-child):after {
-            content: '';
-            position: absolute;
-            top: 40px;
-            right: -40px;
-            width: 80px;
-            height: 2px;
-            background-color: var(--accent-color);
-        }
-        
-        .step-number {
-            width: 80px;
-            height: 80px;
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            font-weight: 700;
-            margin: 0 auto 25px;
-        }
-        
-        .step h3 {
-            font-size: 22px;
-            margin-bottom: 15px;
-        }
-        
-        .step p {
-            color: var(--gray-color);
-        }
-        
-        .cta {
-            padding: 100px 0;
-            background-color: white;
+            padding: 40px;
             text-align: center;
         }
         
-        .cta h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-        
-        .cta p {
-            font-size: 18px;
-            color: var(--gray-color);
-            max-width: 700px;
-            margin: 0 auto 30px;
-        }
-        
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 30px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #E2E8F0;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: var(--accent-color);
-        }
-        
-        footer {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 50px 0 20px;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-column h3 {
-            font-size: 18px;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .footer-column h3:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent-color);
-        }
-        
-        .footer-column ul {
-            list-style: none;
-        }
-        
-        .footer-column ul li {
+        h1 {
+            font-size: 2.8em;
             margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
         
-        .footer-column ul li a {
-            color: #A0AEC0;
-            text-decoration: none;
-            transition: color 0.3s;
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
         }
         
-        .footer-column ul li a:hover {
-            color: white;
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+            flex-wrap: wrap;
         }
         
-        .copyright {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #A0AEC0;
-            font-size: 14px;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-          /* Container adjustments */
-          .container {
-            max-width: 100%;
-            padding: 0 10px;
-          }
-          
-          /* Hide navigation menu */
-          nav {
-            display: none;
-          }
-          
-          /* Hero Section adjustments */
-          .hero-content {
+        .control-group {
+            display: flex;
             flex-direction: column;
-            align-items: center;
-          }
-          .hero-text {
-            padding-right: 0;
-            margin-bottom: 20px;
-            text-align: center;
-          }
-          .hero-image video {
+            gap: 10px;
+        }
+        
+        label {
+            font-weight: 700;
+            color: #495057;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        select {
+            padding: 12px 20px;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            background: white;
+            transition: all 0.3s;
+            min-width: 220px;
+            font-weight: 500;
+        }
+        
+        select:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+        
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
+        }
+        
+        #map-container {
+            position: relative;
             width: 100%;
-            height: auto;
-          }
-          
-          /* Benefits grid becomes one column */
-          .benefits-grid {
-            grid-template-columns: 1fr;
-          }
-          
-          /* How it Works adjustments */
-          .steps {
-            flex-direction: column;
-          }
-          .step {
-            margin-bottom: 20px;
-          }
-          .step:not(:last-child):after {
-            display: none;
-          }
-          
-          /* Footer adjustments */
-          .footer-content {
-            grid-template-columns: 1fr;
-            text-align: center;
-          }
+            height: 800px;
+            background: linear-gradient(to bottom, #e3f2fd 0%, #f5f5f5 100%);
+            overflow: hidden;
         }
-
-
-
-        /* Modal styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
+        
+        #map {
             width: 100%;
             height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.5);
+            cursor: grab;
+        }
+        
+        #map:active {
+            cursor: grabbing;
+        }
+        
+        .province {
+            stroke: #fff;
+            stroke-width: 1;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .province:hover {
+            stroke: #333;
+            stroke-width: 2.5;
+            filter: brightness(1.15) saturate(1.3);
+        }
+        
+        .ccaa-boundary {
+            fill: none;
+            stroke: #333;
+            stroke-width: 2.5;
+            stroke-linejoin: round;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        
+        .tooltip {
+            position: absolute;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(30,30,30,0.95) 100%);
+            color: white;
+            border-radius: 12px;
+            pointer-events: none;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            max-width: 280px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .tooltip.visible {
+            opacity: 1;
+        }
+        
+        .tooltip-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid rgba(102, 126, 234, 0.6);
+            padding-bottom: 8px;
+        }
+        
+        .tooltip-value {
+            font-size: 20px;
+            color: #64b5f6;
+            margin-top: 6px;
+            font-weight: 600;
+        }
+        
+        .legend {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(255, 255, 255, 0.98);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,0,0,0.1);
+            min-width: 200px;
+        }
+        
+        .legend-title {
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 15px;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 8px 0;
+            font-size: 13px;
+        }
+        
+        .legend-color {
+            width: 40px;
+            height: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .zoom-controls {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .zoom-btn {
+            width: 44px;
+            height: 44px;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.3s;
+            color: #495057;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
-
-        .modal-content {
-            background-color: white;
-            margin: auto;
+        
+        .zoom-btn:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: scale(1.1);
+        }
+        
+        .zoom-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .info-panel {
             padding: 30px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-            animation: modalopen 0.5s;
-        }
-
-        .close {
-            color: var(--gray-color);
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close:hover {
-            color: var(--primary-color);
-        }
-
-        @keyframes modalopen {
-            from {opacity: 0; transform: translateY(-50px);}
-            to {opacity: 1; transform: translateY(0);}
-        }
-
-        .success-message {
-            display: none;
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
             text-align: center;
-            color: #059669;
-            background-color: #D1FAE5;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
+        }
+        
+        .info-box {
+            display: inline-block;
+            padding: 20px 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            color: #555;
+            font-size: 1.05em;
+            border-left: 4px solid #667eea;
+        }
+        
+        .info-box strong {
+            color: #667eea;
+        }
+        
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5em;
+            color: #667eea;
+            font-weight: 600;
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-
-        <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3NTCPQXBS6"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-3NTCPQXBS6');
-    </script>
-
-    <script type="text/javascript">
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "qvst67roc3");
-    </script>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container header-content">
-            <div class="logo">Legal<span>Mind</span> AI</div>
-            <nav>
-                <ul>
-                    <li><a href="#beneficios">Beneficios</a></li>
-                    <li><a href="#como-funciona">Cómo Funciona</a></li>
-                    <li><a href="#contacto" class="btn">Solicitar estudio personalizado.</a></li>
-                </ul>
-            </nav>
+    <div class="container">
+        <div class="header">
+            <h1>🗺️ Mapa Interactivo de España</h1>
+            <p class="subtitle">Explora datos demográficos y económicos por provincias</p>
         </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container hero-content">
-            <div class="hero-text">
-                <h1>Transforme su experiencia legal en ventaja competitiva</h1>
-                <p>LegalMind AI potencia el valor de los años de experiencia de tu bufete, combinando el análisis histórico con tecnología de vanguardia para automatizar procesos, optimizar la investigación y facilitar decisiones estratégicas.</p>
-                <a href="#contacto" class="btn">Descubra cómo funciona</a>
-            </div>
-            <div class="hero-image">
-                <video autoplay 
-                loop 
-                muted 
-                playsinline 
-                width="640" 
-                height="360"
-                style="display:block;"> width="640" height="360" controls>
-                    <source src="video.mp4" type="video/mp4">
-                    Tu navegador no soporta la etiqueta de video.
-                </video>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label for="dataSelector">📊 Dato a visualizar</label>
+                <select id="dataSelector">
+                    <option value="mayores65">Población mayor de 65 años</option>
+                    <option value="poblacionTotal">Población total</option>
+                    <option value="densidad">Densidad de población (hab/km²)</option>
+                    <option value="renta">Renta media anual (€)</option>
+                </select>
             </div>
         </div>
-    </section>
-
-    <!-- Benefits Section -->
-    <section class="benefits" id="beneficios">
-        <div class="container">
-            <div class="section-title">
-                <h2>Ventajas que transformarán su práctica legal</h2>
-                <p>LegalMind AI se conecta a tu base de casos y documentos legales, estructurando y centralizando la información de forma segura en un único dashboard. De esta manera, transforma el conocimiento institucional en un activo estratégico que abarca:</p>
+        
+        <div id="map-container">
+            <div class="loading">Cargando mapa geográfico...</div>
+            <svg id="map"></svg>
+            <div class="tooltip"></div>
+            <div class="legend">
+                <div class="legend-title">Escala de valores</div>
+                <div id="legend-content"></div>
             </div>
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h3>Decisiones más rápidas</h3>
-                    <p>Reduce hasta un 70% el tiempo de investigación al identificar automáticamente precedentes y estrategias exitosas en casos similares, combinando la experiencia acumulada con algoritmos de búsqueda avanzada..</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Mayor tasa de éxito</h3>
-                    <p>Aprovecha recomendaciones basadas en datos históricos y procesos automatizados, optimizando la revisión documental y el análisis predictivo para mejorar los resultados de cada caso.</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <h3>Automatización integral</h3>
-                    <p>Minimiza tareas administrativas y repetitivas, desde la revisión de contratos hasta la generación de reportes y la atención al cliente, permitiendo que tus abogados se concentren en lo verdaderamente estratégico.</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-lock"></i>
-                    </div>
-                    <h3>Seguridad garantizada</h3>
-                    <p>Con implementación local y los más altos estándares de privacidad, tu información nunca sale de tus servidores, asegurando que la gestión de datos críticos sea siempre segura y controlada.</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-user-graduate"></i>
-                    </div>
-                    <h3>Conocimiento y formación acelerada</h3>
-                    <p>Facilita el acceso a la experiencia de los mejores profesionales del bufete. Los abogados junior podrán aprender de casos reales y mejorar su capacidad analítica gracias a sugerencias expertas en tiempo real.</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <h3>Ventaja competitiva</h3>
-                    <p>Destaque frente a la competencia ofreciendo soluciones más precisas y fundamentadas en datos probados de éxitos anteriores.</p>
-                </div>
+            <div class="zoom-controls">
+                <button class="zoom-btn" id="zoom-in" title="Acercar">+</button>
+                <button class="zoom-btn" id="zoom-out" title="Alejar">−</button>
+                <button class="zoom-btn" id="zoom-reset" title="Restablecer vista">⟲</button>
             </div>
         </div>
-    </section>
-
-    <!-- How It Works Section -->
-    <section class="how-it-works" id="como-funciona">
-        <div class="container">
-            <div class="section-title">
-                <h2>Cómo funciona LegalMind AI</h2>
-                <p>Una tecnología avanzada con un proceso sencillo para transformar su práctica legal</p>
-            </div>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Integración Total</h3>
-                    <p>Conecta tu historial legal y documentos en una plataforma centralizada, permitiendo una gestión unificada y segura.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Análisis Inteligente y Automatizado</h3>
-                    <p>Al ingresar un nuevo caso, la IA analiza patrones y precedentes en tu propia trayectoria, combinando la experiencia institucional con tecnología avanzada que automatiza la búsqueda y revisión documental.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Recomendaciones Precisamente Personalizada</h3>
-                    <p>Recibe sugerencias estratégicas basadas en la experiencia acumulada y en procesos automatizados, lo que te permite tomar decisiones informadas y adaptadas a cada situación particular.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-<!-- Sección de Caso de Éxito: Ahorro Económico -->
-<section id="case-study" style="background-color: #f9f9f9; padding: 60px 20px; text-align: center;">
-    <div style="max-width: 800px; margin: 0 auto;">
-      <h2 style="font-size: 2.5em; margin-bottom: 20px;">Caso de Éxito</h2>
-      <p style="font-size: 1.2em; margin-bottom: 30px;">
-        Con un equipo de <strong>10 abogados</strong>, este bufete enfrentaba grandes pérdidas debido a tareas administrativas no facturables.
-      </p>
-      <div style="background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-        <p style="font-size: 1.1em; margin-bottom: 15px;">
-          <strong>Antes de LegalMind AI:</strong> Cada abogado perdía aproximadamente <strong>10 horas semanales</strong> en tareas administrativas, lo que se traducía en una pérdida anual de hasta <strong>$100,000</strong> por profesional.
-        </p>
-        <p style="font-size: 1.1em; margin-bottom: 15px;">
-          <strong>Después de implementar LegalMind AI:</strong> La automatización y análisis inteligente redujo ese tiempo en un <strong>50%</strong>, generando un ahorro de aproximadamente <strong>$50,000 anuales</strong> por abogado.
-        </p>
-        <p style="font-size: 1.1em; margin-bottom: 15px;">
-          <strong>Ahorro Total Anual:</strong> <strong>$500,000</strong> para el bufete.
-        </p>
-      </div>
-      <p style="font-size: 1.1em; margin-top: 20px;">
-        LegalMind AI convierte la experiencia acumulada en ahorros tangibles, optimizando procesos y potenciando la eficiencia en cada caso.
-      </p>
-    </div>
-  </section>
-  
-  <!-- Sección de Precios -->
-<section id="pricing" style="background: #ffffff; padding: 60px 20px; text-align: center;">
-  <div style="max-width: 1000px; margin: 0 auto;">
-    <h2 style="font-size: 2.5em; margin-bottom: 20px;">Planes y Precios</h2>
-    <p style="font-size: 1.2em; margin-bottom: 40px;">
-      Elige el plan que se adapta al tamaño y necesidades de tu bufete.
-    </p>
-    <table style="width: 100%; border-collapse: collapse;">
-      <thead>
-        <tr style="background: #f2f2f2;">
-          <th style="padding: 15px; border: 1px solid #ddd;">Tamaño del Bufete</th>
-          <th style="padding: 15px; border: 1px solid #ddd;">Número de Abogados</th>
-          <th style="padding: 15px; border: 1px solid #ddd;">Precio Mensual (USD)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="padding: 15px; border: 1px solid #ddd;">Pequeño</td>
-          <td style="padding: 15px; border: 1px solid #ddd;">1-5</td>
-          <td style="padding: 15px; border: 1px solid #ddd;">Desde $300</td>
-        </tr>
-        <tr>
-          <td style="padding: 15px; border: 1px solid #ddd;">Grande</td>
-          <td style="padding: 15px; border: 1px solid #ddd;">6-12</td>
-          <td style="padding: 15px; border: 1px solid #ddd;">Desde $500</td>
-        </tr>
-        <tr>
-          <td style="padding: 15px; border: 1px solid #ddd;">Enterprise</td>
-          <td style="padding: 15px; border: 1px solid #ddd;">12+</td>
-          <td style="padding: 15px; border: 1px solid #ddd;">A medida</td>
-        </tr>
-      </tbody>
-    </table>
-    <p style="font-size: 1.1em; margin-top: 20px;">
-      * Precios estimados. Contáctanos para una cotización personalizada.
-    </p>
-  </div>
-</section>
-
-    <!-- Modal -->
-    <div id="demoModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Solicitar estudio personalizado</h2>
-            <p>Dejenos su email para comenzar con el proceso.</p>
-            <form id="demoForm" class="contact-form" action="https://formspree.io/f/xjvqwkvo" method="POST">
-                <div class="form-group">
-                    <label for="email">Correo electrónico</label>
-                    <input type="email" id="email" name="email" class="form-control" required>
-                </div>
-                <button type="submit" class="btn" style="width: 100%;">Solicitar estudio personalizado.</button>
-            </form>
-            <div id="successMessage" class="success-message">
-                <i class="fas fa-check-circle" style="font-size: 24px; margin-bottom: 10px;"></i>
-                <h3>¡Gracias por tu interés!</h3>
-                <p>Hemos recibido tu solicitud correctamente.</p>
+        
+        <div class="info-panel">
+            <div class="info-box">
+                💡 <strong>Interactivo:</strong> Usa la rueda del ratón para hacer zoom, arrastra para mover el mapa y pasa el cursor sobre las provincias para ver los datos detallados.
             </div>
         </div>
     </div>
 
-    <!-- CTA Section -->
-    <section class="cta" id="contacto">
-        <div class="container">
-            <h2>Potencia tu bufete con inteligencia artificial</h2>
-            <p>Solicita un estudio personalizado y descubre cómo LegalMind AI puede transformar la práctica de tu despacho.</p>
-            <button class="btn" id="demoBtn">Solicitar estudio personalizado.</button>
-            <p class="small-comment" style="font-size: 0.8em; color: #777; margin-top: 10px;">
-                Este estudio es parte de un proyecto universitario sin compromiso alguno.
-            </p>
-        </div>
-    </section>
-
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>LegalMind AI</h3>
-                    <ul>
-                        <li><a href="#">Sobre nosotros</a></li>
-                        <li><a href="#">Nuestro equipo</a></li>
-                        <li><a href="#">Casos de éxito</a></li>
-                        <li><a href="#">Noticias</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Soluciones</h3>
-                    <ul>
-                        <li><a href="#">Para despachos grandes</a></li>
-                        <li><a href="#">Para despachos medianos</a></li>
-                        <li><a href="#">Áreas de especialización</a></li>
-                        <li><a href="#">Integraciones</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Recursos</h3>
-                    <ul>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Webinars</a></li>
-                        <li><a href="#">White papers</a></li>
-                        <li><a href="#">Preguntas frecuentes</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contacto</h3>
-                    <ul>
-                        <li><a href="#">info@legalmindai.com</a></li>
-                        <li><a href="#">+34 910 000 000</a></li>
-                        <li><a href="#">Soporte</a></li>
-                        <li><a href="#">Trabaja con nosotros</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                &copy; 2025 LegalMind AI. Todos los derechos reservados.
-            </div>
-        </div>
-    </footer>
-
     <script>
-        // Modal functionality
-        const modal = document.getElementById("demoModal");
-        const btn = document.getElementById("demoBtn");
-        const span = document.getElementsByClassName("close")[0];
-        const form = document.getElementById("demoForm");
-        const successMessage = document.getElementById("successMessage");
-    
-        // Abrir modal
-        btn.onclick = function () {
-            modal.style.display = "flex";
+        // Datos por provincia
+        const provinciasDatos = {
+            "Madrid": { mayores65: 712000, poblacionTotal: 6779888, densidad: 847, renta: 32500 },
+            "Barcelona": { mayores65: 892000, poblacionTotal: 5743402, densidad: 734, renta: 31200 },
+            "Valencia": { mayores65: 432000, poblacionTotal: 2589312, densidad: 237, renta: 26800 },
+            "Sevilla": { mayores65: 312000, poblacionTotal: 1950219, densidad: 139, renta: 25100 },
+            "Alicante": { mayores65: 342000, poblacionTotal: 1879888, densidad: 323, renta: 24900 },
+            "Málaga": { mayores65: 285000, poblacionTotal: 1695651, densidad: 231, renta: 25600 },
+            "Murcia": { mayores65: 257000, poblacionTotal: 1511251, densidad: 133, renta: 24200 },
+            "Cádiz": { mayores65: 208000, poblacionTotal: 1240155, densidad: 167, renta: 23800 },
+            "Illes Balears": { mayores65: 178000, poblacionTotal: 1188220, densidad: 237, renta: 28900 },
+            "A Coruña": { mayores65: 205000, poblacionTotal: 1121344, densidad: 141, renta: 25900 },
+            "Bizkaia": { mayores65: 198000, poblacionTotal: 1152651, densidad: 516, renta: 33100 },
+            "Las Palmas": { mayores65: 178000, poblacionTotal: 1134567, densidad: 271, renta: 22400 },
+            "Santa Cruz de Tenerife": { mayores65: 167000, poblacionTotal: 1044887, densidad: 326, renta: 22800 },
+            "Asturias": { mayores65: 242000, poblacionTotal: 1011792, densidad: 96, renta: 26700 },
+            "Tarragona": { mayores65: 142000, poblacionTotal: 817239, densidad: 130, renta: 27400 },
+            "Zaragoza": { mayores65: 152000, poblacionTotal: 972528, densidad: 56, renta: 28100 },
+            "Girona": { mayores65: 118000, poblacionTotal: 795086, densidad: 134, renta: 28600 },
+            "Córdoba": { mayores65: 138000, poblacionTotal: 781451, densidad: 57, renta: 23200 },
+            "Pontevedra": { mayores65: 168000, poblacionTotal: 942665, densidad: 212, renta: 24800 },
+            "Granada": { mayores65: 155000, poblacionTotal: 919455, densidad: 73, renta: 22900 },
+            "Toledo": { mayores65: 112000, poblacionTotal: 707179, densidad: 46, renta: 24100 },
+            "Almería": { mayores65: 115000, poblacionTotal: 727945, densidad: 83, renta: 22600 },
+            "Castellón": { mayores65: 97000, poblacionTotal: 579245, densidad: 88, renta: 25800 },
+            "Jaén": { mayores65: 112000, poblacionTotal: 631381, densidad: 47, renta: 21800 },
+            "León": { mayores65: 98000, poblacionTotal: 457696, densidad: 29, renta: 24300 },
+            "Huelva": { mayores65: 85000, poblacionTotal: 524278, densidad: 52, renta: 23400 },
+            "Lleida": { mayores65: 72000, poblacionTotal: 441461, densidad: 36, renta: 26900 },
+            "Cantabria": { mayores65: 108000, poblacionTotal: 582905, densidad: 110, renta: 27800 },
+            "Cáceres": { mayores65: 72000, poblacionTotal: 390768, densidad: 20, renta: 22100 },
+            "Badajoz": { mayores65: 115000, poblacionTotal: 672137, densidad: 31, renta: 21900 },
+            "Valladolid": { mayores65: 95000, poblacionTotal: 519546, densidad: 64, renta: 26400 },
+            "Ourense": { mayores65: 68000, poblacionTotal: 305223, densidad: 43, renta: 23700 },
+            "La Rioja": { mayores65: 58000, poblacionTotal: 316694, densidad: 63, renta: 27200 },
+            "Araba/Álava": { mayores65: 55000, poblacionTotal: 333940, densidad: 110, renta: 34500 },
+            "Navarra": { mayores65: 112000, poblacionTotal: 661197, densidad: 64, renta: 31800 },
+            "Gipuzkoa": { mayores65: 118000, poblacionTotal: 723576, densidad: 365, renta: 33900 },
+            "Burgos": { mayores65: 65000, poblacionTotal: 356958, densidad: 25, renta: 26800 },
+            "Albacete": { mayores65: 68000, poblacionTotal: 388167, densidad: 26, renta: 23300 },
+            "Ciudad Real": { mayores65: 85000, poblacionTotal: 496137, densidad: 26, renta: 22700 },
+            "Huesca": { mayores65: 42000, poblacionTotal: 220461, densidad: 14, renta: 25600 },
+            "Salamanca": { mayores65: 58000, poblacionTotal: 326934, densidad: 27, renta: 23900 },
+            "Lugo": { mayores65: 58000, poblacionTotal: 326589, densidad: 33, renta: 22800 },
+            "Teruel": { mayores65: 28000, poblacionTotal: 133812, densidad: 9, renta: 23500 },
+            "Cuenca": { mayores65: 35000, poblacionTotal: 196329, densidad: 11, renta: 22400 },
+            "Zamora": { mayores65: 42000, poblacionTotal: 168720, densidad: 16, renta: 22900 },
+            "Ávila": { mayores65: 32000, poblacionTotal: 156720, densidad: 19, renta: 23100 },
+            "Guadalajara": { mayores65: 42000, poblacionTotal: 259111, densidad: 21, renta: 26300 },
+            "Palencia": { mayores65: 32000, poblacionTotal: 159066, densidad: 19, renta: 24600 },
+            "Segovia": { mayores65: 28000, poblacionTotal: 153129, densidad: 22, renta: 25200 },
+            "Soria": { mayores65: 22000, poblacionTotal: 88636, densidad: 9, renta: 24100 }
         };
-    
-        // Cerrar modal con "X"
-        span.onclick = function () {
-            modal.style.display = "none";
-            form.style.display = "block";
-            successMessage.style.display = "none";
-        };
-    
-        // Cerrar modal al hacer clic fuera
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-                form.style.display = "block";
-                successMessage.style.display = "none";
-            }
-        };
-    
-        // Enviar formulario con fetch a Formspree
-        form.addEventListener("submit", async function (e) {
-            e.preventDefault();
-    
-            const data = new FormData(form);
-    
-            const response = await fetch("https://formspree.io/f/xjvqwkvo", {
-                method: "POST",
-                body: data,
-                headers: { Accept: "application/json" }
+
+        const width = 1600;
+        const height = 800;
+        
+        const svg = d3.select("#map")
+            .attr("width", width)
+            .attr("height", height);
+        
+        const g = svg.append("g");
+        const tooltip = d3.select(".tooltip");
+        
+        let currentData = "mayores65";
+        let transform = d3.zoomIdentity;
+        
+        function getColorScale(data) {
+            const values = Object.values(provinciasDatos).map(d => d[data]);
+            return d3.scaleSequential()
+                .domain([d3.min(values), d3.max(values)])
+                .interpolator(d3.interpolateYlOrRd);
+        }
+        
+        let colorScale = getColorScale(currentData);
+        
+        // Configurar zoom
+        const zoom = d3.zoom()
+            .scaleExtent([1, 8])
+            .on("zoom", (event) => {
+                transform = event.transform;
+                g.attr("transform", transform);
             });
-    
-            if (response.ok) {
-                form.style.display = "none";
-                successMessage.style.display = "block";
-                form.reset();
-            } else {
-                alert("Hubo un error al enviar tu solicitud. Inténtalo de nuevo.");
-            }
+        
+        svg.call(zoom);
+        
+        // Botones de zoom
+        d3.select("#zoom-in").on("click", () => {
+            svg.transition().call(zoom.scaleBy, 1.5);
         });
-    
-        // Scroll suave para anclas
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener("click", function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute("href")).scrollIntoView({
-                    behavior: "smooth"
-                });
-            });
+        
+        d3.select("#zoom-out").on("click", () => {
+            svg.transition().call(zoom.scaleBy, 0.67);
         });
-    </script>
-    <script>
-        // Form submission
-        form.onsubmit = function(e) {
-            e.preventDefault();
+        
+        d3.select("#zoom-reset").on("click", () => {
+            svg.transition().call(zoom.transform, d3.zoomIdentity);
+        });
+        
+        // Cargar GeoJSON de provincias españolas
+        const geojsonUrl = "https://raw.githubusercontent.com/codeforgermany/click_that_hood/main/public/data/spain-provinces.geojson";
+        
+        d3.json(geojsonUrl).then(data => {
+            d3.select(".loading").remove();
             
-            // Show loading state
-            const submitBtn = form.querySelector('button[type="submit"]');
-            const originalBtnText = submitBtn.innerHTML;
-            submitBtn.innerHTML = "Enviando...";
-            submitBtn.disabled = true;
+            const projection = d3.geoMercator()
+                .fitSize([width, height], data);
             
-            // Collect form data
-            const formData = {
-                name: document.getElementById("name").value,
-                email: document.getElementById("email").value,
-                company: document.getElementById("company").value,
-                position: document.getElementById("position").value,
-                size: document.getElementById("size").value,
-                interest: document.getElementById("interest").value
-            };
+            const path = d3.geoPath().projection(projection);
             
-            // Send data to Google Sheets
-            fetch('https://script.google.com/macros/s/AKfycbwD4iJBvr2aXmVr6Ad5IYtssAQZT9MMI9PEFn1rWJqfT0juwLajc9Qed3_BpNN1IInp/exec', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Google Analytics event tracking
-                    if (typeof gtag === 'function') {
-                        gtag('event', 'lead_captured', {
-                            'form_type': 'demo_request',
-                            'interest': formData.interest,
-                            'company_size': formData.size
-                        });
+            // Agrupar provincias por CCAA
+            const ccaaGroups = d3.group(data.features, d => d.properties.name);
+            
+            // Dibujar provincias
+            g.selectAll(".province")
+                .data(data.features)
+                .enter()
+                .append("path")
+                .attr("class", "province")
+                .attr("d", path)
+                .attr("fill", d => {
+                    const name = d.properties.name;
+                    if (provinciasDatos[name]) {
+                        return colorScale(provinciasDatos[name][currentData]);
                     }
-                    
-                    // Show success message
-                    form.style.display = "none";
-                    successMessage.style.display = "block";
-                    
-                    // Reset form after submission
-                    setTimeout(function() {
-                        form.reset();
-                    }, 1000);
-                } else {
-                    alert("Hubo un problema al enviar el formulario. Por favor, inténtalo de nuevo.");
-                    submitBtn.innerHTML = originalBtnText;
-                    submitBtn.disabled = false;
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert("Hubo un problema al enviar el formulario. Por favor, inténtalo de nuevo.");
-                submitBtn.innerHTML = originalBtnText;
-                submitBtn.disabled = false;
+                    return "#ddd";
+                })
+                .on("mouseover", function(event, d) {
+                    const name = d.properties.name;
+                    if (provinciasDatos[name]) {
+                        const data = provinciasDatos[name];
+                        const labels = {
+                            mayores65: "Mayores de 65",
+                            poblacionTotal: "Población total",
+                            densidad: "Densidad",
+                            renta: "Renta media"
+                        };
+                        const units = {
+                            mayores65: " personas",
+                            poblacionTotal: " habitantes",
+                            densidad: " hab/km²",
+                            renta: " €"
+                        };
+                        
+                        tooltip.html(`
+                            <div class="tooltip-title">${name}</div>
+                            <div>${labels[currentData]}:</div>
+                            <div class="tooltip-value">${data[currentData].toLocaleString()}${units[currentData]}</div>
+                        `);
+                        tooltip.classed("visible", true);
+                    }
+                })
+                .on("mousemove", function(event) {
+                    tooltip
+                        .style("left", (event.pageX + 15) + "px")
+                        .style("top", (event.pageY - 15) + "px");
+                })
+                .on("mouseout", function() {
+                    tooltip.classed("visible", false);
+                });
+            
+            updateLegend();
+        }).catch(error => {
+            console.error("Error cargando GeoJSON:", error);
+            d3.select(".loading").text("Error al cargar el mapa. Por favor, recarga la página.");
+        });
+        
+        function updateMap() {
+            colorScale = getColorScale(currentData);
+            
+            g.selectAll(".province")
+                .transition()
+                .duration(500)
+                .attr("fill", function(d) {
+                    const name = d.properties.name;
+                    if (provinciasDatos[name]) {
+                        return colorScale(provinciasDatos[name][currentData]);
+                    }
+                    return "#ddd";
+                });
+            
+            updateLegend();
+        }
+        
+        function updateLegend() {
+            const values = Object.values(provinciasDatos).map(d => d[currentData]);
+            const min = d3.min(values);
+            const max = d3.max(values);
+            const range = max - min;
+            
+            const legendSteps = [
+                { value: min, label: min.toLocaleString() },
+                { value: min + range * 0.33, label: Math.round(min + range * 0.33).toLocaleString() },
+                { value: min + range * 0.66, label: Math.round(min + range * 0.66).toLocaleString() },
+                { value: max, label: max.toLocaleString() }
+            ];
+            
+            const legendContent = d3.select("#legend-content");
+            legendContent.selectAll("*").remove();
+            
+            legendSteps.forEach(step => {
+                const item = legendContent.append("div").attr("class", "legend-item");
+                item.append("div")
+                    .attr("class", "legend-color")
+                    .style("background-color", colorScale(step.value));
+                item.append("span").text(step.label);
             });
         }
+        
+        d3.select("#dataSelector").on("change", function() {
+            currentData = this.value;
+            updateMap();
+        });
     </script>
 </body>
 </html>
-
-
